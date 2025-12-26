@@ -1,0 +1,155 @@
+---
+title: Integrations and Extensions
+description: Connect NoteX with your favorite tools and services to enhance productivity and automate workflows across your ecosystem.
+---
+
+## Overview
+
+NoteX integrates seamlessly with calendar apps, project management tools, CRMs, and collaboration platforms. You automate meeting summaries, task creation, and notifications across your workflow. Use native integrations for one-click setup or webhooks for custom logic.
+
+<Columns cols={3}>
+  <Card title="Calendar Apps" icon="calendar" href="#calendar-integrations">
+    Sync meetings from Google Calendar or Outlook.
+  </Card>
+  <Card title="Project Tools" icon="git-branch" href="#project-tools">
+    Auto-create Jira or Asana tasks from notes.
+  </Card>
+  <Card title="Collaboration" icon="message-circle" href="#collaboration">
+    Push summaries to Slack or Microsoft Teams.
+  </Card>
+</Columns>
+
+## Calendar and Project Management Integrations
+
+Connect NoteX to your calendar for automatic meeting transcription and to project tools for task generation.
+
+### Google Calendar Setup
+
+<Tabs>
+  <Tab title="Authorize" icon="key">
+    Visit `https://dashboard.example.com/integrations` and click **Connect Google Calendar**. Grant permissions for reading events.
+  </Tab>
+  <Tab title="Configure" icon="settings">
+    <Steps>
+      <Step title="Select Folders" icon="folder">
+        Choose calendars to monitor.
+      </Step>
+      <Step title="Map Actions" icon="zap">
+        Set rules: e.g., send summary to `meeting-notes@yourteam.com`.
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+<Callout kind="tip">
+  Enable two-way sync to update NoteX with calendar changes.
+</Callout>
+
+### Jira and Asana
+
+Use OAuth for secure access.
+
+```javascript
+// Example: Create Jira issue from meeting action item
+const response = await fetch('https://api.example.com/v1/integrations/jira/issues', {
+  method: 'POST',
+  headers: {
+    'Authorization': 'Bearer YOUR_API_KEY',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    projectKey: 'PROJ',
+    summary: 'Follow up on Q3 budget discussion',
+    description: 'From NoteX meeting: https://api.example.com/meetings/123'
+  })
+});
+```
+
+## Webhooks for Custom Notifications
+
+Webhooks let you receive real-time events from NoteX, like new transcripts.
+
+<Steps>
+  <Step title="Create Webhook" icon="link">
+    In dashboard, go to **Integrations > Webhooks > New**. Enter your endpoint: `https://your-webhook-url.com/notex`.
+  </Step>
+  <Step title="Select Events" icon="bell">
+    Choose `meeting.completed` or `summary.ready`.
+  </Step>
+  <Step title="Test" icon="play">
+    Run a test meeting and verify payload.
+  </Step>
+</Steps>
+
+<CodeGroup tabs="Payload,Verification">
+  ```json
+  {
+    "event": "meeting.completed",
+    "meetingId": "mtg_abc123",
+    "summary": "Key decisions: Approve budget increase.",
+    "timestamp": "2024-10-15T14:30:00Z"
+  }
+  ```
+  ```javascript
+  // Verify signature
+  const crypto = require('crypto');
+  const signature = 'sha256=' + crypto.createHmac('sha256', 'YOUR_WEBHOOK_SECRET')
+    .update(payload)
+    .digest('hex');
+  ```
+</CodeGroup>
+
+<ParamField header="X-NoteX-Signature" param-type="string" required="true">
+  HMAC SHA256 of payload using your secret.
+</ParamField>
+
+## CRM and Collaboration Sync
+
+Push meeting insights to your CRM or chat apps.
+
+<Columns cols={2}>
+  <Card title="Salesforce" icon="database" horizontal>
+    <Steps>
+      <Step title="Connect">Use OAuth at `/integrations/salesforce`.</Step>
+      <Step title="Sync Contacts">Map attendees to leads.</Step>
+    </Steps>
+  </Card>
+  <Card title="Slack" icon="message-circle" horizontal>
+    Post summaries to channels.
+    ```javascript
+    await fetch('https://slack.com/api/chat.postMessage', {
+      body: JSON.stringify({
+        channel: '#meetings',
+        text: 'New summary: ' + summaryUrl
+      })
+    });
+    ```
+  </Card>
+</Columns>
+
+## Best Practices
+
+Follow these guidelines for secure integrations.
+
+<ExpandableGroup>
+  <Expandable title="Security First" default-open="true">
+    Rotate API keys monthly. Use least-privilege scopes. Validate webhook signatures to prevent replay attacks.
+  </Expandable>
+  <Expandable title="Rate Limits">
+    NoteX enforces `<100` requests/minute per integration. Implement exponential backoff:
+    ```javascript
+    const delay = (attempt) => Math.min(1000 * 2 ** attempt, 30000);
+    ```
+  </Expandable>
+  <Expandable title="Error Handling">
+    Log all failures. Retry idempotent operations only.
+  </Expandable>
+</ExpandableGroup>
+
+<Callout kind="alert">
+  Never expose `YOUR_API_KEY` in client-side code. Store securely.
+</Callout>
+
+## Next Steps
+
+Explore advanced automations in the dashboard or check [Quickstart](/quickstart) for basics.

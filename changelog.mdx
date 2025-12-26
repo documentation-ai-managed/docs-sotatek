@@ -1,0 +1,121 @@
+---
+title: Changelog
+description: Track the latest updates, improvements, and new features released for NoteX to stay informed on what's new.
+---
+
+## Recent Updates
+
+<Update label="2024-10-15" description="v1.3.0" tags={["feature", "improvement"]}>
+
+## New Features
+
+- Added Zoom and Google Meet integrations for seamless meeting transcription.
+- Introduced real-time collaboration, allowing multiple users to edit notes simultaneously.
+
+## Improvements
+
+- Enhanced transcription accuracy by `25%` for noisy environments using advanced noise cancellation.
+- Optimized performance for meetings `>2 hours`, reducing latency by `40%`.
+
+## Bug Fixes
+
+- Fixed intermittent sync issues with cloud storage providers.
+- Resolved UI glitches on mobile devices during live transcription.
+
+</Update>
+
+<Update label="2024-09-20" description="v1.2.0" tags={["bugfix", "improvement"]}>
+
+## Improvements
+
+- Improved speaker diarization accuracy, correctly identifying up to `10` speakers in large meetings.
+- Faster export to PDF and Markdown formats, now completing in `<5s` for hour-long sessions.
+
+## Bug Fixes
+
+- Patched security vulnerability in webhook endpoints (CVE-2024-XXXX).
+- Fixed crash when processing meetings with unusual audio codecs.
+
+</Update>
+
+<Update label="2024-08-10" description="v1.1.0" tags={["feature", "breaking"]}>
+
+## New Features
+
+- Launched AI-powered action item extraction from meeting transcripts.
+- Added Slack and Microsoft Teams notifications for meeting summaries.
+
+## Breaking Changes
+
+- Updated API authentication to require JWT tokens instead of API keys. Migrate using the [authentication guide](/authentication).
+
+## Bug Fixes
+
+- Corrected timestamp inaccuracies in exported transcripts.
+- Enhanced error handling for failed transcription uploads.
+
+</Update>
+
+## Upgrade Instructions
+
+Follow these steps to upgrade NoteX to the latest version and benefit from new features.
+
+<Steps>
+  <Step title="Backup Your Data" icon="database">
+
+  Export your existing transcripts and notes to avoid data loss.
+
+  ```
+  # From dashboard
+  Go to Settings > Export > All Data
+  ```
+
+  </Step>
+  <Step title="Update SDK" icon="download">
+
+  Install the latest SDK version.
+
+  <CodeGroup tabs="npm,yarn">
+  ````bash
+  npm install @sotatek/notex-sdk@latest
+  ````
+
+  ````bash
+  yarn add @sotatek/notex-sdk@latest
+  ````
+  </CodeGroup>
+
+  </Step>
+  <Step title="Reconfigure Integrations" icon="settings">
+
+  Update your meeting platform webhooks to point to `https://api.example.com/v1/webhooks/notex`.
+
+  <ParamField header="X-API-Key" param-type="string" required="true">
+    Your new API key from dashboard.
+  </ParamField>
+
+  </Step>
+  <Step title="Test Transcription" icon="play">
+
+  Join a test meeting and verify real-time notes appear correctly.
+
+  </Step>
+</Steps>
+
+<Callout kind="tip">
+  Subscribe to our RSS feed at `/changelog/rss.xml` or join the Discord community for instant update notifications. Check the [quickstart](/quickstart) for full setup after upgrading.
+</Callout>
+
+## Next Steps
+
+<Columns cols={3}>
+  <Card title="Quickstart" icon="rocket" href="/quickstart">
+    Get NoteX running in minutes.
+  </Card>
+  <Card title="Authentication" icon="lock" href="/authentication">
+    Secure your API access.
+  </Card>
+  <Card title="Integrations" icon="plug" href="/introduction#integrations">
+    Connect with your tools.
+  </Card>
+</Columns>

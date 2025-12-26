@@ -1,0 +1,118 @@
+---
+title: Introduction to NoteX - AI Meeting Assistant
+description: Discover NoteX, the AI-powered meeting assistant that transcribes, summarizes, and organizes your meetings effortlessly. Learn about its key features and how it can streamline your workflow.
+---
+
+## Overview
+
+NoteX transforms your meetings by providing real-time AI transcription, intelligent summarization, and automatic organization of action items. You capture every detail without manual note-taking, freeing you to focus on discussions. Built by Sotatek, NoteX integrates seamlessly with popular platforms like Zoom, Google Meet, and Microsoft Teams.
+
+## Key Features
+
+NoteX offers powerful tools to enhance productivity. Explore the core capabilities below.
+
+<Columns cols={3}>
+  <Card title="Real-Time Transcription" icon="mic" href="#transcription">
+    NoteX transcribes speech accurately in multiple languages, handling accents and technical jargon with advanced AI models.
+  </Card>
+  <Card title="AI Summarization" icon="file-text" href="#summarization">
+    Get concise summaries, key highlights, and speaker-specific notes generated instantly after meetings end.
+  </Card>
+  <Card title="Action Item Tracking" icon="check-square" href="#actions">
+    Automatically extracts tasks, assigns owners, and tracks progress across your meetings.
+  </Card>
+</Columns>
+
+<Columns cols={2}>
+  <Card title="Seamless Integrations" icon="plug" href="/configuration">
+    Connects to your calendar, Slack, and project tools for end-to-end workflow automation.
+  </Card>
+  <Card title="Secure & Private" icon="shield" href="/authentication">
+    Enterprise-grade encryption ensures your meeting data stays confidential.
+  </Card>
+</Columns>
+
+## Benefits for Teams and Individuals
+
+<Callout kind="success">
+  Teams save up to 30% more time on meetings by automating post-meeting work, while individuals gain clarity on discussions without exhaustive note-taking.
+</Callout>
+
+Whether you lead a remote team or manage solo projects, NoteX boosts efficiency:
+
+- **Individuals**: Review meetings at double speed with searchable transcripts and summaries.
+- **Teams**: Share organized insights instantly, reducing miscommunication.
+
+<Tabs>
+  <Tab title="For Teams" icon="users">
+    Collaborate effortlessly with shared summaries and integrated task assignments.
+  </Tab>
+  <Tab title="For Individuals" icon="user">
+    Personal knowledge base from every call, with custom AI insights tailored to your needs.
+  </Tab>
+</Tabs>
+
+## Quick Start
+
+Get up and running in minutes.
+
+<Steps>
+  <Step title="Sign Up" icon="user-plus">
+    Create your free account at `https://dashboard.example.com/signup`.
+  </Step>
+  <Step title="Connect Calendar" icon="calendar">
+    Link your Google or Outlook calendar to auto-join meetings.
+  </Step>
+  <Step title="Start Transcribing" icon="play">
+    Join a meeting and enable NoteX—transcription begins automatically.
+  </Step>
+  <Step title="Review Summary" icon="file">
+    Access your AI-generated summary and action items post-meeting.
+  </Step>
+</Steps>
+
+For developers, integrate via API:
+
+<CodeGroup tabs="JavaScript,Python">
+  ```javascript
+  const response = await fetch('https://api.example.com/v1/transcribe/start', {
+    method: 'POST',
+    headers: { 'Authorization': `Bearer ${YOUR_API_KEY}` },
+    body: JSON.stringify({ meetingId: 'meeting-123' })
+  });
+  const data = await response.json();
+  console.log(data.transcriptUrl);
+  ```
+  ```python
+  import requests
+  response = requests.post(
+      'https://api.example.com/v1/transcribe/start',
+      headers={'Authorization': f'Bearer {YOUR_API_KEY}'},
+      json={'meetingId': 'meeting-123'}
+  )
+  print(response.json()['transcriptUrl'])
+  ```
+</CodeGroup>
+
+## Next Steps
+
+Dive deeper into NoteX:
+
+<Columns cols={2}>
+  <Card title="Quickstart Guide" icon="zap" href="/quickstart">
+    Set up your first integration and run a test meeting.
+  </Card>
+  <Card title="Authentication" icon="lock" href="/authentication">
+    Secure your API access with tokens and webhooks.
+  </Card>
+  <Card title="Configuration" icon="settings" href="/configuration">
+    Customize AI models and integrations.
+  </Card>
+  <Card title="Changelog" icon="git-branch" href="/changelog">
+    Stay updated with the latest releases.
+  </Card>
+</Columns>
+
+<Callout kind="tip">
+  Start with the <a href="/quickstart">Quickstart Guide</a> to transcribe your next meeting today.
+</Callout>
